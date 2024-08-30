@@ -1,7 +1,19 @@
 # Musicwall
 
-## Build by @shreyashchandra inspired by @hkirat
+### Built by [@shreyashchandra](https://github.com/shreyashchandra), inspired by [@hkirat](https://github.com/hkirat)
 
-- [x] Add Authentication (Next Auth)
-- [x] Creacting Git Repo
-- [ ] Hosting the app
+## Features & Progress
+
+- [x] **Add Authentication** (Next Auth)
+- [x] **Create Git Repository**
+- [x] **Host the Application**
+- [ ] **Create Database Schema**
+  - [ ] **User**
+  - [ ] **Space**
+  - [ ] **Active Stream**
+  - [ ] **Stream History**
+- [ ] **Create API Endpoints**
+  - [ ] **User Creates a Space**
+  - [ ] **End Users Add Streams**
+  - [ ] **End Users Upvote/Cancel Upvote on Streams**
+  - [ ] **Fetch Current Streams with Upvotes**
