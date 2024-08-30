@@ -7,7 +7,7 @@ function Appbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex items-center justify-between p-3 shadow-sm shadow-slate-700 px-10">
+    <div className="flex items-center justify-between p-3 shadow-sm shadow-slate-700 px-10 cursor-pointer">
       <div className="font-bold text-3xl text-blue-100">Musicwall</div>
       <div className="font-semibold text-lg text-blue-50">
         {session ? (
