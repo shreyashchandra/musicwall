@@ -8,9 +8,9 @@
 - [x] **Create Git Repository**
 - [x] **Host the Application**
 - [ ] **Create Database Schema**
-  - [ ] **User**
-  - [ ] **Space**
-  - [ ] **Active Stream**
+  - [x] **User**
+  - [x] **Upvotes**
+  - [x] **Active Stream**
   - [ ] **Stream History**
 - [ ] **Create API Endpoints**
   - [ ] **User Creates a Space**

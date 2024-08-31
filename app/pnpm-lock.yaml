@@ -11,6 +11,9 @@ dependencies:
   next-auth:
     specifier: ^4.24.7
     version: 4.24.7(next@14.2.7)(react-dom@18.3.1)(react@18.3.1)
+  prisma:
+    specifier: ^5.19.0
+    version: 5.19.0
   react:
     specifier: ^18
     version: 18.3.1
@@ -286,6 +289,38 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@prisma/debug@5.19.0:
+    resolution: {integrity: sha512-+b/G0ubAZlrS+JSiDhXnYV5DF/aTJ3pinktkiV/L4TtLRLZO6SVGyFELgxBsicCTWJ2ZMu5vEV/jTtYCdjFTRA==}
+    dev: false
+
+  /@prisma/engines-version@5.19.0-31.5fe21811a6ba0b952a3bc71400666511fe3b902f:
+    resolution: {integrity: sha512-GimI9aZIFy/yvvR11KfXRn3pliFn1QAkdebVlsXlnoh5uk0YhLblVmeYiHfsu+wDA7BeKqYT4sFfzg8mutzuWw==}
+    dev: false
+
+  /@prisma/engines@5.19.0:
+    resolution: {integrity: sha512-UtW+0m4HYoRSSR3LoDGKF3Ud4BSMWYlLEt4slTnuP1mI+vrV3zaDoiAPmejdAT76vCN5UqnWURbkXxf66nSylQ==}
+    requiresBuild: true
+    dependencies:
+      '@prisma/debug': 5.19.0
+      '@prisma/engines-version': 5.19.0-31.5fe21811a6ba0b952a3bc71400666511fe3b902f
+      '@prisma/fetch-engine': 5.19.0
+      '@prisma/get-platform': 5.19.0
+    dev: false
+
+  /@prisma/fetch-engine@5.19.0:
+    resolution: {integrity: sha512-oOiPNtmJX0cP/ebu7BBEouJvCw8T84/MFD/Hf2zlqjxkK4ojl38bB9i9J5LAxotL6WlYVThKdxc7HqoWnPOhqQ==}
+    dependencies:
+      '@prisma/debug': 5.19.0
+      '@prisma/engines-version': 5.19.0-31.5fe21811a6ba0b952a3bc71400666511fe3b902f
+      '@prisma/get-platform': 5.19.0
+    dev: false
+
+  /@prisma/get-platform@5.19.0:
+    resolution: {integrity: sha512-s9DWkZKnuP4Y8uy6yZfvqQ/9X3/+2KYf3IZUVZz5OstJdGBJrBlbmIuMl81917wp5TuK/1k2TpHNCEdpYLPKmg==}
+    dependencies:
+      '@prisma/debug': 5.19.0
+    dev: false
 
   /@rushstack/eslint-patch@1.10.4:
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
@@ -1371,7 +1406,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /function-bind@1.1.2:
@@ -2363,6 +2397,17 @@ packages:
 
   /pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
+    dev: false
+
+  /prisma@5.19.0:
+    resolution: {integrity: sha512-Pu7lUKpVyTx8cVwM26dYh8NdvMOkMnJXzE8L6cikFuR4JwyMU5NKofQkWyxJKlTT4fNjmcnibTvklV8oVMrn+g==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 5.19.0
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: false
 
   /prop-types@15.8.1:
