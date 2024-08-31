@@ -1,23 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prismaClient } from "@/lib/db";
-import { url } from "inspector";
 
-const YT_REGEX = new RegExp(
-  "^(?:(?:https?:)?//)?(?:www.)?(?:m.)?(?:youtu(?:be)?.com/(?:v/|embed/|watch(?:/|?v=))|youtu.be/)((?:w|-){11})(?:S+)?$"
-);
-
-// const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
-// const spotifyRegex = /^(https?:\/\/)?(open\.)?spotify\.com\/.+$/;
-
-// const CreateStreamSchema = z.object({
-//   creatorId: z.string(),
-//   url: z
-//     .string()
-//     .refine((url) => youtubeRegex.test(url) || spotifyRegex.test(url), {
-//       message: "URL must be from YouTube or Spotify",
-//     }),
-// });
+const YT_REGEX =
+  /^(?:(?:https?:)?\/\/)?(?:www\.)?(?:m\.)?(?:youtu(?:be)?\.com\/(?:v\/|embed\/|watch(?:\/|\?v=))|youtu\.be\/)((?:\w|-){11})(?:\S+)?$/;
 
 const CreateStreamSchema = z.object({
   creatorId: z.string(),
@@ -42,19 +28,18 @@ const CreateStreamSchema = z.object({
 export async function POST(req: NextRequest) {
   try {
     const data = CreateStreamSchema.parse(await req.json());
-    const isYt = YT_REGEX.test(data.url);
+    const isYt = data.url.match(YT_REGEX);
 
     if (!isYt) {
       return NextResponse.json(
-        {
-          message: "Wrong url",
-        },
-        { status: 411 }
+        { message: "Invalid YouTube URL" },
+        { status: 400 }
       );
     }
 
-    const extractedId = data.url.split("?v=")[1];
-    prismaClient.stream.create({
+    const extractedId = isYt[1]; // Extract the video ID from the regex match
+
+    const stream = await prismaClient.stream.create({
       data: {
         userId: data.creatorId,
         url: data.url,
@@ -62,12 +47,37 @@ export async function POST(req: NextRequest) {
         type: "Youtube",
       },
     });
-  } catch (error) {
+
     return NextResponse.json(
-      {
-        message: "Error while adding stream",
+      { message: "Stream added successfully", id: stream.id },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    console.error("Error in POST handler:", error.message || error);
+    return NextResponse.json(
+      { message: "Error while adding stream" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const creatorId = req.nextUrl.searchParams.get("creatorId");
+    const streams = await prismaClient.stream.findMany({
+      where: {
+        userId: creatorId ?? "",
       },
-      { status: 411 }
+    });
+
+    return NextResponse.json({
+      streams,
+    });
+  } catch (error: any) {
+    console.error("Error in GET handler:", error.message || error);
+    return NextResponse.json(
+      { message: "Error while fetching streams" },
+      { status: 500 }
     );
   }
 }
