@@ -15,5 +15,5 @@
 - [ ] **Create API Endpoints**
   - [ ] **User Creates a Space**
   - [x] **End Users Add Streams**
-  - [ ] **End Users Upvote/Cancel Upvote on Streams**
+  - [x] **End Users Upvote/Cancel Upvote on Streams**
   - [ ] **Fetch Current Streams with Upvotes**
