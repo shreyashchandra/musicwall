@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prismaClient } from "@/lib/db";
 
+// @ts-ignore
+import youtubesearchapi from "youtube-search-api";
+
 const YT_REGEX =
   /^(?:(?:https?:)?\/\/)?(?:www\.)?(?:m\.)?(?:youtu(?:be)?\.com\/(?:v\/|embed\/|watch(?:\/|\?v=))|youtu\.be\/)((?:\w|-){11})(?:\S+)?$/;
 
@@ -38,6 +41,9 @@ export async function POST(req: NextRequest) {
     }
 
     const extractedId = isYt[1]; // Extract the video ID from the regex match
+    const videoDetails = await youtubesearchapi.GetVideoDetails(extractedId);
+    const thumbnail = videoDetails.thumbnail.thumbnails;
+    thumbnail.sort();
 
     const stream = await prismaClient.stream.create({
       data: {
@@ -45,6 +51,15 @@ export async function POST(req: NextRequest) {
         url: data.url,
         extractedId,
         type: "Youtube",
+        title: videoDetails.title ?? "No title found",
+        smallImgUrl:
+          (thumbnail.length > 1
+            ? thumbnail[thumbnail.length - 2].url
+            : thumbnail[thumbnail.length - 1].url) ??
+          "https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg",
+        bigImgUrl: thumbnail
+          ? thumbnail[thumbnail.length - 1].url
+          : "https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg",
       },
     });
 
