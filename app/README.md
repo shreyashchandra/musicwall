@@ -16,4 +16,8 @@
   - [ ] **User Creates a Space**
   - [x] **End Users Add Streams**
   - [x] **End Users Upvote/Cancel Upvote on Streams**
-  - [ ] **Fetch Current Streams with Upvotes**
+  - [x] **Fetch Current Streams with Upvotes**
+- [ ] **Frontends**
+  - [ ] **Landing Page**
+  - [ ] **Creator Page**
+  - [ ] **User Facing Page**
