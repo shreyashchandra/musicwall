@@ -18,6 +18,6 @@
   - [x] **End Users Upvote/Cancel Upvote on Streams**
   - [x] **Fetch Current Streams with Upvotes**
 - [ ] **Frontends**
-  - [ ] **Landing Page**
+  - [x] **Landing Page**
   - [ ] **Creator Page**
   - [ ] **User Facing Page**
