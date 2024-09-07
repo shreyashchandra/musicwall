@@ -19,5 +19,5 @@
   - [x] **Fetch Current Streams with Upvotes**
 - [ ] **Frontends**
   - [x] **Landing Page**
-  - [ ] **Creator Page**
+  - [x] **Creator Page**
   - [ ] **User Facing Page**

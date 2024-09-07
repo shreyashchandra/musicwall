@@ -1,8 +1,17 @@
 "use client";
-import { signIn } from "next-auth/react";
-import React from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+import React, { useEffect } from "react";
 
 function HeroSection() {
+  const router = useRouter();
+  const session = useSession();
+  useEffect(() => {
+    if (session.data?.user) {
+      router.push("/creator");
+    }
+  }, [session]);
   return (
     <div className="my-[20%] flex flex-col items-center gap-5">
       <h1 className="text-center text-3xl font-semibold text-white">
